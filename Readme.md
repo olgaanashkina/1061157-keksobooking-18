@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ольга Анашкина](https://up.htmlacademy.ru/javascript/18/user/1061157).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Рубец](https://up.htmlacademy.ru/javascript/18/user/id41580).
 
 ---
 
