@@ -26,8 +26,13 @@ var getElementWidth = function (selector) {
   return elementWidth;
 };
 
-var x = getRandomInteger(1, getElementWidth('.map') - PIN_HALF_WIDTH);
-var y = getRandomInteger(130, 630) - PIN_HEIGHT;
+var getX = function () {
+  return getRandomInteger(1, getElementWidth('.map'));
+};
+
+var getY = function () {
+  return getRandomInteger(130, 630);
+};
 
 var getAvatar = function (index) {
   var avatarImage = 'img/avatars/user0' + (index + 1) + '.png';
@@ -55,7 +60,7 @@ var getTime = function () {
 };
 
 var getAdditionsList = function () {
-  var additionsList = ADDITIONS.splice(0, getRandomInteger(0, ADDITIONS.length - 1));
+  var additionsList = ADDITIONS.slice(getRandomInteger(0, ADDITIONS.length - 2));
   return additionsList;
 };
 
@@ -65,18 +70,18 @@ var getDescription = function () {
 };
 
 var getHotelPhoto = function () {
-  var hotelPhoto = HOTEL_PHOTOS.splice(0, getRandomInteger(0, HOTEL_PHOTOS.length - 1));
+  var hotelPhoto = HOTEL_PHOTOS.slice(getRandomInteger(0, HOTEL_PHOTOS.length - 2));
   return hotelPhoto;
 };
 
-var getProposal = function () {
+var getProposal = function (index) {
   return {
     author: {
-      avatar: getAvatar(1)
+      avatar: getAvatar(index)
     },
     offer: {
       title: getTitle(),
-      address: x + ', ' + y,
+      address: getX() + ', ' + getY(),
       price: getPrice(),
       type: getType(),
       rooms: getRandomInteger(1, 5),
@@ -88,87 +93,44 @@ var getProposal = function () {
       photos: getHotelPhoto()
     },
     location: {
-      x: x,
-      y: y
+      x: getX(),
+      y: getY()
     }
   };
 };
-
-var userMap = document.querySelector('.map');
 
 var getProposals = function () {
   var proposals = [];
 
   for (var i = 0; i < MAX_COUNT_OFFER; i++) {
-    proposals.push(getProposal());
+    proposals.push(getProposal(i));
   }
-
   return proposals;
-};
-
-var createProposal = function () {
-  var proposalItem = document.createElement('template');
-
-  proposalItem.className = 'test';
-  proposalItem.innerHTML = '<img class="test__avatar" scr=""  width="70" height="70" alt="Аватар пользователя"><h3 class="test__title"></h3><p class="test__address"></p><p class="test__price"></p><p class="test__type"></p><p class="test__number"></p><p class="test__time"></p><p class="test__addition"></p><p class="test__description"></p><p class="test__photo"></p><p class="test__x"></p><p class="test__y"></p>';
-
-  userMap.appendChild(proposalItem);
-
-  return proposalItem;
-};
-
-var templateItem = document.querySelector('.test');
-
-var fillProposal = function (proposal) {
-  var proposalItemContent = templateItem.cloneNode(true);
-
-  proposalItemContent.querySelector('.test__avatar').src = proposal.author.avatar;
-  proposalItemContent.querySelector('.test__title').textContent = proposal.offer.title;
-  proposalItemContent.querySelector('.test__address').textContent = proposal.offer.address;
-  proposalItemContent.querySelector('.test__price').textContent = proposal.offer.price;
-  proposalItemContent.querySelector('.test__type').textContent = proposal.offer.type;
-  proposalItemContent.querySelector('.test__number').textContent = proposal.offer.rooms + ' комнаты для ' + proposal.offer.guests + ' гостей';
-  proposalItemContent.querySelector('.test__time').textContent = 'Заезд после ' + proposal.offer.checkin + ', выезд до ' + proposal.offer.checkout;
-  proposalItemContent.querySelector('.test__description').textContent = proposal.description;
-  proposalItemContent.querySelector('.test__photo').src = proposal.offer.photos;
-  proposalItemContent.querySelector('.test__x').textContent = proposal.location.x;
-  proposalItemContent.querySelector('.test__y').textContent = proposal.location.y;
-
-  return proposalItemContent;
-};
-
-var createProposals = function (container, proposals) {
-  var fragment = document.createDocumentFragment();
-  for (var i = 0; i < MAX_COUNT_OFFER; i++) {
-    fragment.appendChild(fillProposal(proposals[i]));
-  }
-  container.appendChild(fragment);
 };
 
 var similarPinTemplate = document.querySelector('#pin')
     .content
-    .querySelector('img');
+    .querySelector('.map__pin');
 
 var createPin = function (proposal) {
   var pinElement = similarPinTemplate.cloneNode(true);
-
-  pinElement.querySelector('img').src = proposal.author.avatar;
-  pinElement.querySelector('img').alt = proposal.offer.title;
-  pinElement.querySelector('img').style = 'left: ' + proposal.location.x + 'px; top: ' + proposal.location.x + 'px;';
+  pinElement.style = 'left: ' + (proposal.location.x - PIN_HALF_WIDTH) + 'px; top: ' + (proposal.location.y - PIN_HEIGHT) + 'px;';
+  var pinImage = pinElement.querySelector('img');
+  pinImage.src = proposal.author.avatar;
+  pinImage.alt = proposal.offer.title;
 
   return pinElement;
 };
 
-var createPins = function (container, proposals) {
+var createPins = function (proposals) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < MAX_COUNT_OFFER; i++) {
     fragment.appendChild(createPin(proposals[i]));
   }
-  container.appendChild(fragment);
+  return fragment;
 };
 
 activateElement('.map');
-createProposal();
 var proposals = getProposals();
-createProposals(similarPinTemplate, proposals);
-createPins(similarPinTemplate, proposals);
+document.querySelector('.map__pins')
+  .appendChild(createPins(proposals));
