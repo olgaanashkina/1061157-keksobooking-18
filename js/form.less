@@ -1,0 +1,142 @@
+.form {
+  width: 320px;
+  margin: 0 auto;
+  margin-bottom: 53px;
+  line-height: 18px;
+}
+
+.form__container {
+  width: 320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__type,
+.form__color,
+.form__full,
+.form__contact,
+.form__comment {
+  width: 260px;
+  margin: 0 auto;
+  padding: 0;
+  border: none;
+}
+
+.form__contact {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.form__wrapper {
+  width: 260px;
+  margin: 0 auto;
+}
+
+.form__note {
+  margin: 0;
+  margin-bottom: 32px;
+  padding-top: 10px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: normal;
+  .greyish;
+}
+
+.form__button {
+  width: 260px;
+  padding-top: 18px;
+  padding-bottom: 16px;
+  font-size: 17px;
+  line-height: 16px;
+  font-weight: bold;
+  background: none;
+
+  &:hover,
+  &:focus {
+    color: #ffffff;
+    background: @greyish;
+  }
+
+  &:active {
+    color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+@media (min-width: @tablet-width) {
+  .form {
+    width: 768px;
+    margin-bottom: 48px;
+  }
+
+  .form__container {
+    width: 768px;
+    margin: 0;
+    margin-bottom: 48px;
+    padding-top: 68px;
+    background: @light-pink;
+
+    &--contact {
+      padding-top: 50px;
+    }
+  }
+
+  .form__type,
+  .form__color,
+  .form__full,
+  .form__contact,
+  .form__comment {
+    width: 672px;
+    margin: 0 auto;
+    border-top: none;
+  }
+
+  .form__wrapper {
+    width: 672px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .form__note {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    line-height: 30px;
+  }
+
+  .form__button {
+    width: 230px;
+  }
+}
+
+@media (min-width: @desktop-width) {
+  .form {
+    width: 1150px;
+  }
+
+  .form__container {
+    width: 1150px;
+    padding-top: 70px;
+    margin-bottom: 50px;
+
+    &--contact {
+      padding-top: 50px;
+    }
+  }
+
+  .form__type,
+  .form__color,
+  .form__full,
+  .form__contact,
+  .form__comment {
+    width: 920px;
+    margin: 0 auto;
+  }
+
+  .form__wrapper {
+    width: 700px;
+  }
+}
