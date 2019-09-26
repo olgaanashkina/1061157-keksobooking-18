@@ -6,6 +6,10 @@ var PIN_HALF_WIDTH = 25;
 var OFFER_TITLES = ['Выгодное предложение', 'Удобное расположение', 'Метро рядом'];
 var PRICES = [1000, 3000, 5000, 9000, 12000, 15000, 18000, 20000];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var MIN_COUNT_ROOMS = 1;
+var MAX_COUNT_ROOMS = 5;
+var MIN_COUNT_GUESTS = 1;
+var MAX_COUNT_GUESTS = 10;
 var CHECK_TIMES = ['12:00', '13:00', '14:00'];
 var ADDITIONS = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var DESCRIPTIONS = ['Оформление в стиле минимализм', 'Завтрак включен в стоимость проживания', 'Комната хранения багажа - бесплатно'];
@@ -39,39 +43,14 @@ var getAvatar = function (index) {
   return avatarImage;
 };
 
-var getTitle = function () {
-  var titleRandom = OFFER_TITLES[getRandomInteger(0, OFFER_TITLES.length - 1)];
-  return titleRandom;
+var getRandomItem = function (arr) {
+  var randomItem = arr[getRandomInteger(0, arr.length - 1)];
+  return randomItem;
 };
 
-var getPrice = function () {
-  var priceRandom = PRICES[getRandomInteger(0, PRICES.length - 1)];
-  return priceRandom;
-};
-
-var getType = function () {
-  var typeRandom = TYPES[getRandomInteger(0, TYPES.length - 1)];
-  return typeRandom;
-};
-
-var getTime = function () {
-  var timeRandom = CHECK_TIMES[getRandomInteger(0, CHECK_TIMES.length - 1)];
-  return timeRandom;
-};
-
-var getAdditionsList = function () {
-  var additionsList = ADDITIONS.slice(getRandomInteger(0, ADDITIONS.length - 2));
-  return additionsList;
-};
-
-var getDescription = function () {
-  var description = DESCRIPTIONS[getRandomInteger(0, DESCRIPTIONS.length - 1)];
-  return description;
-};
-
-var getHotelPhoto = function () {
-  var hotelPhoto = HOTEL_PHOTOS.slice(getRandomInteger(0, HOTEL_PHOTOS.length - 2));
-  return hotelPhoto;
+var getRandomItemSlice = function (arr) {
+  var randomItemSlice = arr.slice(getRandomInteger(0, arr.length - 2));
+  return randomItemSlice;
 };
 
 var getProposal = function (index) {
@@ -80,17 +59,17 @@ var getProposal = function (index) {
       avatar: getAvatar(index)
     },
     offer: {
-      title: getTitle(),
+      title: getRandomItem(OFFER_TITLES),
       address: getX() + ', ' + getY(),
-      price: getPrice(),
-      type: getType(),
-      rooms: getRandomInteger(1, 5),
-      guests: getRandomInteger(1, 10),
-      checkin: getTime(),
-      checkout: getTime(),
-      features: getAdditionsList(),
-      description: getDescription(),
-      photos: getHotelPhoto()
+      price: getRandomItem(PRICES),
+      type: getRandomItem(TYPES),
+      rooms: getRandomInteger(MIN_COUNT_ROOMS, MAX_COUNT_ROOMS),
+      guests: getRandomInteger(MIN_COUNT_GUESTS, MAX_COUNT_GUESTS),
+      checkin: getRandomItem(CHECK_TIMES),
+      checkout: getRandomItem(CHECK_TIMES),
+      features: getRandomItemSlice(ADDITIONS),
+      description: getRandomItem(DESCRIPTIONS),
+      photos: getRandomItemSlice(HOTEL_PHOTOS)
     },
     location: {
       x: getX(),
