@@ -4,6 +4,7 @@ var ENTER_KEYCODE = 13;
 var BIG_PIN_HALF_SIZE = 33;
 var BIG_PIN_HEIGHT_ACTIVE = 70;
 var DEFAULT_ROOM_NUMBER = '1';
+var MAX_ROOM_NUMBER = '100';
 // var MAX_COUNT_OFFER = 8;
 // var PIN_HEIGHT = 70;
 // var PIN_HALF_WIDTH = 25;
@@ -136,10 +137,10 @@ var setAddress = function (selector, isActive) {
   address.value = '{' + locationX(selector) + ', ' + locationY(selector, isActive) + '}';
 };
 
-var setStateElement = function (selector, boolean) {
+var setStateElement = function (selector, disabled) {
   var fields = document.querySelectorAll(selector + ' fieldset', selector + ' select');
   for (var i = 0; i < fields.length; i++) {
-    fields[i].disabled = boolean;
+    fields[i].disabled = disabled;
   }
 };
 
@@ -150,7 +151,7 @@ var setCapacity = function (room) {
   if (typeof room === 'undefined') {
     room = DEFAULT_ROOM_NUMBER;
   }
-  if (room === '100') {
+  if (room === MAX_ROOM_NUMBER) {
     room = '0';
   }
   for (var i = 0; i < guestCount.length; i++) {
