@@ -18,7 +18,7 @@
 
   pinMapActive.addEventListener('mousedown', function () {
     onUserPinDown();
-    window.pin.showMapPins();
+    window.pin.getMapPins();
   });
 
   pinMapActive.addEventListener('keydown', function (evt) {
