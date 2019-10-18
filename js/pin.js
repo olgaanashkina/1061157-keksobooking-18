@@ -28,6 +28,14 @@
       .appendChild(fragment);
   };
 
+  var cleanPins = function () {
+    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    pins.forEach(function (i) {
+      document.querySelectorAll('.map__pins')
+        .removeChild(pins[i]);
+    });
+  };
+
   var errorMessage = function (message) {
     var main = document.querySelector('main');
     var errorTemplate = document.querySelector('#error')
@@ -43,10 +51,12 @@
   };
 
   var getMapPins = function () {
-    window.backend.load(URL, createPins, errorMessage);
+    window.proposals = window.backend.load(URL, createPins, errorMessage);
   };
 
   window.pin = {
-    getMapPins: getMapPins,
+    createPins: createPins,
+    cleanPins: cleanPins,
+    getMapPins: getMapPins
   };
 })();

@@ -23,5 +23,6 @@
 
   pinMapActive.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, onUserPinDown);
+    window.pin.getMapPins();
   });
 })();
