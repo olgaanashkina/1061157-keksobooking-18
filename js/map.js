@@ -19,7 +19,9 @@
   pinMapActive.addEventListener('mousedown', function () {
     onUserPinDown();
     window.pin.getMapPins();
-  });
+  },
+  {once: true}
+  );
 
   pinMapActive.addEventListener('keydown', function (evt) {
     window.util.isEnterEvent(evt, onUserPinDown);

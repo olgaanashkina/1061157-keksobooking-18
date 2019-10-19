@@ -3,7 +3,6 @@
 (function () {
   var MAX_COUNT_OFFER = 5;
 
-  // var mapFilters = document.querySelector('.map__filters');
   var housingType = document.querySelector('#housing-type');
 
   var getTypeHouse = function (item) {

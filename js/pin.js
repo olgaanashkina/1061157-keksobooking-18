@@ -19,6 +19,11 @@
     return pinElement;
   };
 
+  var onSuccess = function (proposals) {
+    window.proposals = proposals;
+    createPins(proposals);
+  };
+
   var createPins = function (proposals) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < proposals.length; i++) {
@@ -30,13 +35,12 @@
 
   var cleanPins = function () {
     var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-    pins.forEach(function (i) {
-      document.querySelectorAll('.map__pins')
-        .removeChild(pins[i]);
+    pins.forEach(function (pin) {
+      pin.remove();
     });
   };
 
-  var errorMessage = function (message) {
+  var onError = function (message) {
     var main = document.querySelector('main');
     var errorTemplate = document.querySelector('#error')
       .content
@@ -51,7 +55,7 @@
   };
 
   var getMapPins = function () {
-    window.proposals = window.backend.load(URL, createPins, errorMessage);
+    window.proposals = window.backend.load(URL, onSuccess, onError);
   };
 
   window.pin = {
