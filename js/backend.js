@@ -8,7 +8,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      onLoad(xhr.response);
+      onLoad(window.filters.filterTypeHouse(xhr.response));
     });
 
     xhr.addEventListener('error', function () {
