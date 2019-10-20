@@ -6,9 +6,7 @@
   var housingType = document.querySelector('#housing-type');
 
   var getTypeHouse = function (item) {
-    if (housingType.value === 'any') {
-      return true;
-    } return item.offer.type === housingType.value;
+    return housingType.value === 'any' ? true : item.offer.type === housingType.value;
   };
 
   var filterTypeHouse = function (proposals) {
