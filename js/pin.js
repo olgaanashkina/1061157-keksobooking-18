@@ -28,17 +28,30 @@
     mapPins.appendChild(fragment);
   };
 
+  var getIndex = function (element) {
+    var button = element.closest('button');
+    var parent = element.closest('.map__pins');
+    var children = Array.prototype.slice.call(parent.children);
+
+    return children.indexOf(button) - 2;
+  };
+
   var onSuccess = function (proposals) {
     window.proposals = proposals;
     createPins(proposals);
 
     var openPopup = function (evt) {
       if (evt.type === 'click') {
-        window.card.currentCard();
+        window.card.closePopup();
+        var index = getIndex(evt.target);
+        var filterProposals = window.filters.filterTypeHouse(proposals);
+        window.card.renderCard(filterProposals, index);
       }
     };
 
-    mapPins.addEventListener('click', openPopup);
+    mapPins.addEventListener('click', function (evt) {
+      openPopup(evt);
+    });
 
     return proposals;
   };
