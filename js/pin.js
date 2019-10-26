@@ -4,6 +4,7 @@
   var PIN_HEIGHT = 70;
   var PIN_HALF_WIDTH = 25;
   var URL = 'https://js.dump.academy/keksobooking/data';
+  var mapPins = document.querySelector('.map__pins');
 
   var similarPinTemplate = document.querySelector('#pin')
     .content
@@ -19,18 +20,27 @@
     return pinElement;
   };
 
-  var onSuccess = function (proposals) {
-    window.proposals = proposals;
-    createPins(proposals);
-  };
-
   var createPins = function (proposals) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < proposals.length; i++) {
       fragment.appendChild(createPin(proposals[i]));
     }
-    document.querySelector('.map__pins')
-      .appendChild(fragment);
+    mapPins.appendChild(fragment);
+  };
+
+  var onSuccess = function (proposals) {
+    window.proposals = proposals;
+    createPins(proposals);
+
+    var openPopup = function (evt) {
+      if (evt.type === 'click') {
+        window.card.currentCard();
+      }
+    };
+
+    mapPins.addEventListener('click', openPopup);
+
+    return proposals;
   };
 
   var cleanPins = function () {
