@@ -18,6 +18,7 @@
   };
 
   var onHouseFilter = function () {
+    window.card.closePopup();
     window.pin.cleanPins();
     window.pin.createPins(filterTypeHouse(window.proposals));
   };
