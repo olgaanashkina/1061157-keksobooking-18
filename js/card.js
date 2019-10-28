@@ -67,25 +67,24 @@
     return cardElement;
   };
 
-  var onCloseButtonClick = function () {
-    closePopup();
-  };
-
-  var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEYCODE) {
-      closePopup();
-    }
-  };
-
   var closePopup = function () {
     var popup = document.querySelector('.popup');
     if (popup) {
-      var buttonClosePopup = popup.querySelector('.popup__close');
-      buttonClosePopup.addEventListener('click', onCloseButtonClick);
-      document.addEventListener('keydown', onPopupEscPress);
       popup.remove();
     }
   };
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.util.ESC_KEYCODE) {
+      closePopup();
+    }
+  });
+
+  document.addEventListener('click', function (evt) {
+    if (evt.target.matches('.popup__close')) {
+      closePopup();
+    }
+  });
 
   var renderCard = function (proposals, index) {
     var fragment = document.createDocumentFragment();
@@ -100,5 +99,4 @@
     closePopup: closePopup,
     renderCard: renderCard
   };
-
 })();

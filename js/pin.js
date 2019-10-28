@@ -40,7 +40,7 @@
     window.proposals = proposals;
     createPins(proposals);
 
-    var openPopup = function (evt) {
+    var openPopupClick = function (evt) {
       if (evt.type === 'click') {
         window.card.closePopup();
         var index = getIndex(evt.target);
@@ -49,8 +49,21 @@
       }
     };
 
+    var openPopupEnter = function (evt) {
+      if (evt.keyCode === window.util.ENTER_KEYCODE) {
+        window.card.closePopup();
+        var index = getIndex(evt.target);
+        var filterProposals = window.filters.filterTypeHouse(proposals);
+        window.card.renderCard(filterProposals, index);
+      }
+    };
+
     mapPins.addEventListener('click', function (evt) {
-      openPopup(evt);
+      openPopupClick(evt);
+    });
+
+    mapPins.addEventListener('keydown', function (evt) {
+      openPopupEnter(evt);
     });
 
     return proposals;
