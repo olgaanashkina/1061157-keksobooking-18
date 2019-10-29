@@ -15,8 +15,6 @@
   var price = form.querySelector('#price');
   var timeIn = form.querySelector('#timein');
   var timeOut = form.querySelector('#timeout');
-  // var successPopup = document.querySelector('#success')
-  //   .content.querySelector('.success');
 
   var priceType = {
     bungalo: '0',
