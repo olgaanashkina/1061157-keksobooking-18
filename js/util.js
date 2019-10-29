@@ -6,6 +6,7 @@ window.util = (function () {
 
   return {
     ESC_KEYCODE: ESC_KEYCODE,
+    ENTER_KEYCODE: ENTER_KEYCODE,
 
     isEnterEvent: function (evt, action) {
       if (evt.keyCode === ENTER_KEYCODE) {
