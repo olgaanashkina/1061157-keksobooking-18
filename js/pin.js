@@ -58,12 +58,14 @@
       }
     };
 
-    mapPins.addEventListener('click', function (evt) {
-      openPopupClick(evt);
-    });
-
-    mapPins.addEventListener('keydown', function (evt) {
-      openPopupEnter(evt);
+    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+    pins.forEach(function (pin) {
+      pin.addEventListener('click', function (evt) {
+        openPopupClick(evt);
+      });
+      pin.addEventListener('keydown', function (evt) {
+        openPopupEnter(evt);
+      });
     });
 
     return proposals;
