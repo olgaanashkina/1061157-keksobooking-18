@@ -5,8 +5,8 @@
   var BIG_PIN_HEIGHT_ACTIVE = 70;
   var X_MAP_MIN = 0 - BIG_PIN_HALF_SIZE;
   var X_MAP_MAX = document.querySelector('.map__overlay').offsetWidth - BIG_PIN_HALF_SIZE;
-  var Y_MAP_MIN = 130 - BIG_PIN_HEIGHT_ACTIVE;
-  var Y_MAP_MAX = 630 - BIG_PIN_HEIGHT_ACTIVE;
+  var Y_MAP_MIN = 130;
+  var Y_MAP_MAX = 630;
   var pinMain = document.querySelector('.map__pin--main');
 
   var startX = function (selector) {
