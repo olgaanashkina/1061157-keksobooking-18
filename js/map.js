@@ -7,8 +7,8 @@
   window.form.setCapacity();
 
   var onUserPinDown = function () {
-    window.mainPin.setStartAddress('.map__pin--main', true);
     window.util.isActivateElement('.map', 'map--faded');
+    window.mainPin.setStartAddress('.map__pin--main', true);
     window.util.isActivateElement('.ad-form', 'ad-form--disabled');
     window.form.setStateElement('.ad-form', false);
     window.form.setStateElement('.map__filters', false);
@@ -25,4 +25,16 @@
     window.util.isEnterEvent(evt, onUserPinDown);
     window.pin.getMapPins();
   });
+
+  var deactivatePage = function () {
+    window.util.isDeactivateElement('.map', 'map--faded');
+    window.util.isDeactivateElement('.ad-form', 'ad-form--disabled');
+    window.mainPin.setDefaultAddress();
+    window.card.closePopup();
+    window.pin.cleanPins();
+  };
+
+  window.map = {
+    deactivatePage: deactivatePage
+  };
 })();

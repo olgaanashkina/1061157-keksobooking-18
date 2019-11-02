@@ -79,17 +79,7 @@
   };
 
   var onError = function (message) {
-    var main = document.querySelector('main');
-    var errorTemplate = document.querySelector('#error')
-      .content
-      .querySelector('.error');
-    var errorBlock = errorTemplate.cloneNode(true);
-    errorBlock.querySelector('.error__message').textContent = message;
-    main.appendChild(errorBlock);
-    var errorButton = errorBlock.querySelector('.error__button');
-    errorButton.addEventListener('click', function () {
-      main.removeChild(errorBlock);
-    });
+    window.message.renderMessageError(message);
   };
 
   var getMapPins = function () {
