@@ -6,6 +6,7 @@
   var MAX_PRICE = '1000000';
 
   var form = document.querySelector('.ad-form');
+  var formReset = form.querySelector('.ad-form__reset');
   var roomNumber = form.querySelector('#room_number');
   var guestCount = form.querySelector('#capacity').children;
   var typeHouse = form.querySelector('#type');
@@ -108,6 +109,31 @@
 
   timeOut.addEventListener('change', function () {
     timeIn.value = timeOut.value;
+  });
+
+  var resetForm = function () {
+    form.reset();
+    window.map.deactivatePage();
+    window.mainPin.pinMain.addEventListener('click', window.map.onPinClickDown);
+  };
+
+  formReset.addEventListener('click', function () {
+    window.mainPin.setDefaultAddress();
+    resetForm();
+  });
+
+  var onSuccess = function () {
+    window.message.renderMessageSuccess();
+  };
+
+  var onError = function (message) {
+    window.message.renderMessageError(message);
+  };
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), onSuccess, onError);
+    resetForm();
   });
 
   window.form = {

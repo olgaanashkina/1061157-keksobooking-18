@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var DEFAULT_X = 570;
+  var DEFAULT_Y = 375;
   var BIG_PIN_HALF_SIZE = 33;
   var BIG_PIN_HEIGHT_ACTIVE = 70;
   var X_MAP_MIN = 0 - BIG_PIN_HALF_SIZE;
@@ -31,6 +33,12 @@
     var address = document.querySelector('#address');
     address.value = x + ', ' + y;
     return address;
+  };
+
+  var setDefaultAddress = function () {
+    pinMain.style.left = DEFAULT_X + 'px';
+    pinMain.style.top = DEFAULT_Y + 'px';
+    setAddress(DEFAULT_X + BIG_PIN_HALF_SIZE, DEFAULT_Y + BIG_PIN_HALF_SIZE);
   };
 
   var onMouseDown = function (evt) {
@@ -89,6 +97,8 @@
 
   window.mainPin = {
     pinMain: pinMain,
-    setStartAddress: setStartAddress
+    setStartAddress: setStartAddress,
+    setAddress: setAddress,
+    setDefaultAddress: setDefaultAddress
   };
 })();

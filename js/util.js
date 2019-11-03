@@ -14,9 +14,20 @@ window.util = (function () {
       }
     },
 
+    isEscEvent: function (evt, action) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        action();
+      }
+    },
+
     isActivateElement: function (selector, nameClass) {
       var element = document.querySelector(selector);
       element.classList.remove(nameClass);
+    },
+
+    isDeactivateElement: function (selector, nameClass) {
+      var element = document.querySelector(selector);
+      element.classList.add(nameClass);
     },
 
     getRandomInteger: function (min, max) {

@@ -30,6 +30,9 @@
 
   var getIndex = function (element) {
     var button = element.closest('button');
+    if (!button || button.classList.contains('map__pin--main')) {
+      return null;
+    }
     var parent = element.closest('.map__pins');
     var children = Array.prototype.slice.call(parent.children);
 
@@ -44,28 +47,16 @@
       if (evt.type === 'click') {
         window.card.closePopup();
         var index = getIndex(evt.target);
-        var filterProposals = window.filters.filterTypeHouse(proposals);
-        window.card.renderCard(filterProposals, index);
+        if (index !== null) {
+          var filterProposals = window.filters.filterTypeHouse(proposals);
+          window.card.renderCard(filterProposals, index);
+        }
       }
     };
 
-    var openPopupEnter = function (evt) {
-      if (evt.keyCode === window.util.ENTER_KEYCODE) {
-        window.card.closePopup();
-        var index = getIndex(evt.target);
-        var filterProposals = window.filters.filterTypeHouse(proposals);
-        window.card.renderCard(filterProposals, index);
-      }
-    };
-
-    var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
-    pins.forEach(function (pin) {
-      pin.addEventListener('click', function (evt) {
-        openPopupClick(evt);
-      });
-      pin.addEventListener('keydown', function (evt) {
-        openPopupEnter(evt);
-      });
+    var pinsContainer = document.querySelector('.map__pins');
+    pinsContainer.addEventListener('click', function (evt) {
+      openPopupClick(evt);
     });
 
     return proposals;
@@ -79,17 +70,7 @@
   };
 
   var onError = function (message) {
-    var main = document.querySelector('main');
-    var errorTemplate = document.querySelector('#error')
-      .content
-      .querySelector('.error');
-    var errorBlock = errorTemplate.cloneNode(true);
-    errorBlock.querySelector('.error__message').textContent = message;
-    main.appendChild(errorBlock);
-    var errorButton = errorBlock.querySelector('.error__button');
-    errorButton.addEventListener('click', function () {
-      main.removeChild(errorBlock);
-    });
+    window.message.renderMessageError(message);
   };
 
   var getMapPins = function () {
