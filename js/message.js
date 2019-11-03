@@ -26,7 +26,6 @@
       .content
       .querySelector('.success');
     var successBlock = successTemplate.cloneNode(true);
-    // successBlock.querySelector('.success__message').textContent = message;
     main.appendChild(successBlock);
     var removeSuccessBlock = function () {
       successBlock.remove();

@@ -6,7 +6,7 @@
   window.form.setStateElement('.map__filters', true);
   window.form.setCapacity();
 
-  var onUserPinDown = function () {
+  var activePage = function () {
     window.util.isActivateElement('.map', 'map--faded');
     window.mainPin.setStartAddress('.map__pin--main', true);
     window.util.isActivateElement('.ad-form', 'ad-form--disabled');
@@ -14,27 +14,31 @@
     window.form.setStateElement('.map__filters', false);
   };
 
-  window.mainPin.pinMain.addEventListener('mousedown', function () {
-    onUserPinDown();
+  var onPinClickDown = function () {
+    activePage();
     window.pin.getMapPins();
-  },
-  {once: true}
+  };
+
+  window.mainPin.pinMain.addEventListener('mousedown', onPinClickDown,
+      {once: true}
   );
 
   window.mainPin.pinMain.addEventListener('keydown', function (evt) {
-    window.util.isEnterEvent(evt, onUserPinDown);
-    window.pin.getMapPins();
+    window.util.isEnterEvent(evt, onPinClickDown);
   });
 
   var deactivatePage = function () {
     window.util.isDeactivateElement('.map', 'map--faded');
     window.util.isDeactivateElement('.ad-form', 'ad-form--disabled');
+    window.form.setStateElement('.map__filters', true);
     window.mainPin.setDefaultAddress();
     window.card.closePopup();
     window.pin.cleanPins();
   };
 
   window.map = {
-    deactivatePage: deactivatePage
+    deactivatePage: deactivatePage,
+    activePage: activePage,
+    onPinClickDown: onPinClickDown
   };
 })();

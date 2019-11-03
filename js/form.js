@@ -111,15 +111,19 @@
     timeIn.value = timeOut.value;
   });
 
-  formReset.addEventListener('click', function () {
+  var resetForm = function () {
     form.reset();
-    setMinPrice();
+    window.map.deactivatePage();
+    window.mainPin.pinMain.addEventListener('click', window.map.onPinClickDown);
+  };
+
+  formReset.addEventListener('click', function () {
+    window.mainPin.setDefaultAddress();
+    resetForm();
   });
 
   var onSuccess = function () {
     window.message.renderMessageSuccess();
-    form.reset();
-    window.map.deactivatePage();
   };
 
   var onError = function (message) {
@@ -129,8 +133,7 @@
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     window.backend.save(new FormData(form), onSuccess, onError);
-    form.reset();
-    window.map.deactivatePage();
+    resetForm();
   });
 
   window.form = {
