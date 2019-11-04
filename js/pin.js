@@ -48,7 +48,7 @@
         window.card.closePopup();
         var index = getIndex(evt.target);
         if (index !== null) {
-          var filterProposals = window.filters.filterTypeHouse(proposals);
+          var filterProposals = window.filters.filtersMap(proposals);
           window.card.renderCard(filterProposals, index);
         }
       }
