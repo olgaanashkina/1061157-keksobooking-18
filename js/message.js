@@ -39,6 +39,6 @@
 
   window.message = {
     renderMessageError: renderMessageError,
-    renderMessageSuccess: renderMessageSuccess
+    renderMessageSuccess: renderMessageSuccess,
   };
 })();

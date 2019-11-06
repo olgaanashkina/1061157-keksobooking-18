@@ -80,6 +80,6 @@
   window.pin = {
     createPins: createPins,
     cleanPins: cleanPins,
-    getMapPins: getMapPins
+    getMapPins: getMapPins,
   };
 })();

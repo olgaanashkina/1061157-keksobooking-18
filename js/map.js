@@ -39,6 +39,6 @@
   window.map = {
     deactivatePage: deactivatePage,
     activePage: activePage,
-    onPinClickDown: onPinClickDown
+    onPinClickDown: onPinClickDown,
   };
 })();

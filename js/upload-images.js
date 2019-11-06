@@ -55,6 +55,6 @@
   };
 
   window.uploadImages = {
-    cleanFileChooser: cleanFileChooser
+    cleanFileChooser: cleanFileChooser,
   };
 })();
