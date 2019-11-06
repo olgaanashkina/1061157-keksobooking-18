@@ -114,6 +114,7 @@
   var resetForm = function () {
     form.reset();
     window.map.deactivatePage();
+    window.uploadImages.cleanFileChooser();
     window.mainPin.pinMain.addEventListener('click', window.map.onPinClickDown);
   };
 
