@@ -7,11 +7,11 @@
     .content
     .querySelector('.map__card');
 
-  var flatType = {
-    flat: 'Квартира',
-    bungalo: 'Бунгало',
-    house: 'Дом',
-    palace: 'Дворец'
+  var FlatType = {
+    FLAT: 'Квартира',
+    BUNGALO: 'Бунгало',
+    HOUSE: 'Дом',
+    PALACE: 'Дворец',
   };
 
   var getRoomEnd = function (rooms) {
@@ -50,7 +50,7 @@
     var cardPrice = cardElement.querySelector('.popup__text--price');
     cardPrice.textContent = card.offer.price + '₽/ночь';
     var cardType = cardElement.querySelector('.popup__type');
-    cardType.textContent = flatType[card.offer.type];
+    cardType.textContent = FlatType[card.offer.type];
     var cardCapacity = cardElement.querySelector('.popup__text--capacity');
     cardCapacity.textContent = card.offer.rooms + getRoomEnd(card.offer.rooms) + ' для ' + card.offer.guests + getGuestEnd(card.offer.guests);
     var cardTime = cardElement.querySelector('.popup__text--time');
@@ -97,6 +97,6 @@
 
   window.card = {
     closePopup: closePopup,
-    renderCard: renderCard
+    renderCard: renderCard,
   };
 })();

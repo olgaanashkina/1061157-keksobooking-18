@@ -99,6 +99,6 @@
     pinMain: pinMain,
     setStartAddress: setStartAddress,
     setAddress: setAddress,
-    setDefaultAddress: setDefaultAddress
+    setDefaultAddress: setDefaultAddress,
   };
 })();

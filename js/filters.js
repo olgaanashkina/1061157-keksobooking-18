@@ -62,6 +62,6 @@
   filter.addEventListener('change', onHouseFilter);
 
   window.filters = {
-    filtersMap: filtersMap
+    filtersMap: filtersMap,
   };
 })();
