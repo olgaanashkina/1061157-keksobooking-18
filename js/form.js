@@ -22,16 +22,16 @@
     }
   };
 
-  var PriceType = {
-    BUNGALO: '0',
-    FLAT: '1000',
-    HOUSE: '5000',
-    PALACE: '10000',
+  var priceType = {
+    bungalo: '0',
+    flat: '1000',
+    house: '5000',
+    palace: '10000',
   };
 
   var setMinPrice = function () {
-    price.min = PriceType[typeHouse.value];
-    price.placeholder = PriceType[typeHouse.value];
+    price.min = priceType[typeHouse.value];
+    price.placeholder = priceType[typeHouse.value];
   };
 
   typeHouse.addEventListener('change', function () {
@@ -113,6 +113,7 @@
 
   var resetForm = function () {
     form.reset();
+    setMinPrice();
     window.map.deactivatePage();
     window.uploadImages.cleanFileChooser();
     window.mainPin.pinMain.addEventListener('click', window.map.onPinClickDown);
