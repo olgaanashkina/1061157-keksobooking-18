@@ -45,7 +45,7 @@
     createPins(sliceProposals);
 
     var openPopupClick = function (evt) {
-      if (evt.type === 'click') {
+      if (evt.type === 'click' && evt.target.closest('button')) {
         window.card.closePopup();
         var index = getIndex(evt.target);
         if (index !== null) {
