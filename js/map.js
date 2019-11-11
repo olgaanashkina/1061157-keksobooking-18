@@ -30,6 +30,7 @@
   var deactivatePage = function () {
     window.util.isDeactivateElement('.map', 'map--faded');
     window.util.isDeactivateElement('.ad-form', 'ad-form--disabled');
+    window.form.setStateElement('.ad-form', true);
     window.form.setStateElement('.map__filters', true);
     window.mainPin.setDefaultAddress();
     window.card.closePopup();

@@ -3,9 +3,9 @@
 (function () {
   var PIN_HEIGHT = 70;
   var PIN_HALF_WIDTH = 25;
+  var MAX_COUNT_OFFER = 5;
   var URL = 'https://js.dump.academy/keksobooking/data';
   var mapPins = document.querySelector('.map__pins');
-
   var similarPinTemplate = document.querySelector('#pin')
     .content
     .querySelector('.map__pin');
@@ -41,10 +41,11 @@
 
   var onSuccess = function (proposals) {
     window.proposals = proposals;
-    createPins(proposals);
+    var sliceProposals = window.proposals.slice(0, MAX_COUNT_OFFER);
+    createPins(sliceProposals);
 
     var openPopupClick = function (evt) {
-      if (evt.type === 'click') {
+      if (evt.type === 'click' && evt.target.closest('button')) {
         window.card.closePopup();
         var index = getIndex(evt.target);
         if (index !== null) {
@@ -74,7 +75,7 @@
   };
 
   var getMapPins = function () {
-    window.proposals = window.backend.load(URL, onSuccess, onError);
+    window.proposals = (window.backend.load(URL, onSuccess, onError));
   };
 
   window.pin = {

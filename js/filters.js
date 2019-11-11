@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var MAX_COUNT_OFFER = 5;
   var MIN_PRICE = 10000;
   var MAX_PRICE = 50000;
   var filter = document.querySelector('.map__filters');
@@ -49,8 +48,7 @@
           getGuests(item) &&
           getFeatures(item)
         );
-      })
-      .slice(0, MAX_COUNT_OFFER);
+      });
   };
 
   var onHouseFilter = window.debounce(function () {
