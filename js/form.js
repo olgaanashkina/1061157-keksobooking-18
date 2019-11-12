@@ -46,11 +46,7 @@
       room = '0';
     }
     for (var i = 0; i < guestCount.length; i++) {
-      if (guestCount[i].value <= room) {
-        guestCount[i].disabled = false;
-      } else {
-        guestCount[i].disabled = true;
-      }
+      guestCount[i].disabled = (guestCount[i].value <= room) ? false : true;
       if (room !== '0' && guestCount[i].value === '0') {
         guestCount[i].disabled = true;
       }
